@@ -4,17 +4,22 @@
     <TargetFramework>net5.0</TargetFramework>
     <Nullable>enable</Nullable>
     <PackageId>Mflex.InSiteXMLClient</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Copyright>Copyright ©2021 Mflex</Copyright>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <Authors>kennywangjin</Authors>    
     <Description>Rewritten Camstar .NET client for dotnet5 and upper platform</Description>
     <Company>Mflex</Company>
     <PackageReleaseNotes>Rewritten Camstar .NET client for dotnet5 and upper platform</PackageReleaseNotes>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
