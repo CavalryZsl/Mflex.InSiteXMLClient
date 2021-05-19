@@ -22,7 +22,7 @@ namespace Mflex.InSiteXMLClient
 
         public int MaxRetries { get; set; } = 3;
 
-        public CamstarClient(string hostName, int port)
+        public CamstarClient(string hostName, int port = 2881)
         {
             _hostName = hostName;
             _port = port;
