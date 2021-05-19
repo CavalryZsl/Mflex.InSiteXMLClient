@@ -32,4 +32,4 @@ jobs:
         run: dotnet pack ${{env.project}} --output nuget-packages --configuration Release
 
       - name: Publish
-        run: dotnet nuget push nuget-packages/*.nupkg --api-key oy2al7gs7b7gpf6l4xjqpkielmvpwyeetf2drynybb24aa --source https://api.nuget.org/v3/index.json
+        run: dotnet nuget push nuget-packages/*.nupkg --api-key oy2eojb32a2ypg6ro6oqb72avnatzuuulni3xlqoj4zspq --source https://api.nuget.org/v3/index.json
