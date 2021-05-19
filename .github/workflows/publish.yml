@@ -7,8 +7,6 @@ jobs:
   publish:
     name: build, pack & publish
     runs-on: ubuntu-latest
-    env: # env nuget
-      NUGET_AUTH_TOKEN: ${{secrets.NUGET_AUTH_TOKEN}}
 
     steps:
       - uses: actions/checkout@v2
@@ -45,7 +43,7 @@ jobs:
           # TAG_FORMAT: v*
 
           # API key to authenticate with NuGet server
-          NUGET_KEY: ${{env.NUGET_AUTH_TOKEN}}
+          NUGET_KEY: ${{env.NUGET.NUGET_AUTH_TOKEN}}
 
           # NuGet server uri hosting the packages, defaults to https://api.nuget.org
           # NUGET_SOURCE: https://api.nuget.org
