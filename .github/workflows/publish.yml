@@ -20,7 +20,7 @@ jobs:
         id: publish_nuget
         uses: rohith/publish-nuget@v2
         env: # env nuget
-          NUGET_AUTH_TOKEN:${{secrets.NUGET_AUTH_TOKEN}}
+          - NUGET_AUTH_TOKEN: ${{secrets.NUGET_AUTH_TOKEN}}
         with:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: Mflex.InSiteXMLClient/Mflex.InSiteXMLClient.csproj
