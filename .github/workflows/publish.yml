@@ -7,6 +7,8 @@ jobs:
   publish:
     name: build, pack & publish
     runs-on: ubuntu-latest
+    env: # env nuget
+      NUGET_AUTH_TOKEN: ${{secrets.NUGET_AUTH_TOKEN}}
     steps:
       - uses: actions/checkout@v2
 
@@ -19,8 +21,6 @@ jobs:
       - name: publish on version change
         id: publish_nuget
         uses: rohith/publish-nuget@v2
-        env: # env nuget
-          NUGET_AUTH_TOKEN: ${{secrets.NUGET_AUTH_TOKEN}}
         with:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: Mflex.InSiteXMLClient/Mflex.InSiteXMLClient.csproj
