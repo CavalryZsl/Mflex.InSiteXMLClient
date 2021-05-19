@@ -11,7 +11,7 @@ namespace Mflex.InSiteXMLClient
             Add(level);
         }
 
-        public ContainerObject(string nameOrId, string levelName, bool isById = false)
+        public ContainerObject(string nameOrId, string levelName = "", bool isById = false)
             : this(nameOrId, new ContainerLevelObject(levelName), isById)
         { }
     }
