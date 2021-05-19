@@ -12,7 +12,7 @@ jobs:
     name: build, pack & publish
     runs-on: ubuntu-latest
     env:
-      - project: Mflex.InSiteXMLClient/Mflex.InSiteXMLClient.csproj
+      project: Mflex.InSiteXMLClient/Mflex.InSiteXMLClient.csproj
     steps:
       - name: Checkout
         uses: actions/checkout@v2
