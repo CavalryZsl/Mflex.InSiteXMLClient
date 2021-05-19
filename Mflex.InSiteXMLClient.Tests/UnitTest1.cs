@@ -17,19 +17,19 @@ namespace Mflex.InSiteXMLClient.Tests
 
                 var doc = new DocumentObject("jw33002401", "Wj--198312");
 
-                // var svc = doc.AddService("M_QuickPass");
-                // svc.InputData
-                //     .Add("Employee", new NamedDataObject("Employee", "mes_smt"))
-                //     .Add("Resource", new NamedDataObject("Resource", "HZ-SMT-ET-001"))
-                //     .Add("Spec", new RevisionedDataObject("Spec", "4183ALSB3EP"))
-                //     .AddSubentityList("ServiceDetails")
-                //     .Add("Container", new ContainerObject("C470305022FMDFQ87-AJ75", string.Empty));
-
-                var svc = doc.AddService("MoveNonStd");
+                var svc = doc.AddService("M_QuickPass");
                 svc.InputData
-                    .Add("Container", new ContainerObject("C470305022FMDFQ87-AJ75", string.Empty))
-                    .Add("ToWorkFlow", new RevisionedDataObject("Workflow", "CAA11067_040-CF008_A_4183"))
-                    .Add("ToStep", new NamedDataObject("WorkflowStep", "4183MICTB1W"));
+                    .AddNamedDataObject("Employee", "mes_smt")
+                    .AddNamedDataObject("Resource", "HZ-SMT-ET-001")
+                    .AddRevisionedDataObject("Spec", "4183ALSB3EP");
+                svc.InputData.AddSubentityList("ServiceDetails")
+                   .Add(new ContainerObject("C470305022FMDFQ87-AJ75", string.Empty));
+
+                //var svc = doc.AddService("MoveNonStd");
+                //svc.InputData
+                //    .AddContainer("Container", "C470305022FMDFQ87-AJ75")
+                //    .AddRevisionedDataObject("ToWorkFlow", "CAA11067_040-CF008_A_4183")
+                //    .AddNamedDataObject("ToStep", "4183MICTB1W");
 
                 Debug.WriteLine(doc);
                 var res = client.SendAsync(doc).Result;

@@ -13,6 +13,8 @@ namespace Mflex.InSiteXMLClient
 
         public ContainerObject(string nameOrId, string levelName, bool isById = false)
             : this(nameOrId, new ContainerLevelObject(levelName), isById)
-        { }
+        {
+
+        }
     }
 }

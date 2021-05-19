@@ -7,7 +7,7 @@ namespace Mflex.InSiteXMLClient
     public class SubentityList : CamstarObject
     {
         private readonly XElement _listItem = new("__listItem", new XAttribute("__listItemAction", "add"));
-        private readonly List<CamstarObject> _childObjects = new List<CamstarObject>();
+        private readonly List<CamstarObject> _childObjects = new();
 
         public new IEnumerable<CamstarObject> ChildObjects => _childObjects;
 
@@ -21,15 +21,6 @@ namespace Mflex.InSiteXMLClient
             _childObjects.Add(obj);
             _listItem.Add(obj.XmlObject);
             return this;
-        }
-
-        public override SubentityList Add(string propertyName, CamstarObject obj)
-        {
-            if (obj.TypeName != propertyName)
-            {
-                obj.TypeName = propertyName;
-            }
-            return Add(obj);
         }
     }
 }

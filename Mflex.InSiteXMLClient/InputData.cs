@@ -25,14 +25,28 @@ namespace Mflex.InSiteXMLClient
             return _subentities[name];
         }
 
-        public override InputData Add(CamstarObject obj)
+        public InputData AddNamedDataObject(string propertyName, string name, bool isById = false)
         {
-            return (InputData)(base.Add(obj));
+            return (InputData)Add(new NamedDataObject(propertyName, name, isById));
         }
 
-        public override InputData Add(string propertyName, CamstarObject obj)
+        public InputData AddRevisionedDataObject(string propertyName, string name, string? revision = null, bool isById = false)
         {
-            return (InputData)(base.Add(propertyName, obj));
+            return (InputData)Add(new RevisionedDataObject(propertyName, name, revision, isById));
+        }
+
+        public InputData AddContainer(string propertyName, string name, string level = "", bool isById = false)
+        {
+            var obj = new ContainerObject(name, level, isById)
+            {
+                InstanceType = propertyName
+            };
+            return (InputData)Add(obj);
+        }
+
+        public InputData AddProperty(string properName, string value)
+        {
+            return (InputData)Add(new PropertyObject(properName, value));
         }
     }
 }

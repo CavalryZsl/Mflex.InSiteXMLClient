@@ -15,21 +15,21 @@ namespace Mflex.InSiteXMLClient
             XmlObject.Add(new XElement("__txnGUID", Guid.NewGuid().ToString()));
             XmlObject.Add(new XElement("__utcOffset", "+08:00"));
             InputData = AddInputData();
-            XmlObject.Add(new ExecuteObject().XmlObject);
+            Add(new ExecuteObject());
             RequestData = AddRequestData();
         }
 
         private InputData AddInputData()
         {
             var inputData = new InputData();
-            XmlObject.Add(inputData.XmlObject);
+            Add(inputData);
             return inputData;
         }
 
         private RequestData AddRequestData()
         {
             var requestData = new RequestData();
-            XmlObject.Add(requestData.XmlObject);
+            Add(requestData);
             return requestData;
         }
     }
