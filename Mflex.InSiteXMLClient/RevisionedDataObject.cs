@@ -15,11 +15,11 @@ namespace Mflex.InSiteXMLClient
             Revision = revision;
             if (UseROR)
             {
-                ElementItem.Add(new XElement("__useROR", "true"));
+                XmlObject.Add(new XElement("__useROR", "true"));
             }
             else
             {
-                ElementItem.Add(new XElement("__rev", new XCData(revision!)));
+                XmlObject.Add(new XElement("__rev", new XCData(revision!)));
             }
         }
     }

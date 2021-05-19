@@ -8,7 +8,7 @@ namespace Mflex.InSiteXMLClient
     {
         private string _typeName;
 
-        public XElement ElementItem { get; }
+        internal XElement XmlObject { get; }
 
         public string TypeName
         {
@@ -16,7 +16,7 @@ namespace Mflex.InSiteXMLClient
             set
             {
                 _typeName = value;
-                ElementItem.Name = value;
+                XmlObject.Name = value;
             }
         }
 
@@ -35,7 +35,7 @@ namespace Mflex.InSiteXMLClient
                 throw new ArgumentNullException(nameof(typeName));
             }
             _typeName = typeName;
-            ElementItem = new XElement(typeName);
+            XmlObject = new XElement(typeName);
         }
 
         public CamstarObject(string typeName, string nameOrId, bool isById = false)
@@ -57,22 +57,25 @@ namespace Mflex.InSiteXMLClient
             }
 
             string tagName = isById ? "__Id" : "__name";
-            ElementItem.Add(new XElement(tagName, new XCData(nameOrId)));
+            XmlObject.Add(new XElement(tagName, new XCData(nameOrId)));
         }
 
         public virtual CamstarObject Add(CamstarObject obj)
         {
             ChildObjects.Add(obj);
-            ElementItem.Add(obj.ElementItem);
+            XmlObject.Add(obj.XmlObject);
             return this;
         }
 
         public virtual CamstarObject Add(string propertyName, CamstarObject obj)
         {
-            obj.TypeName = propertyName;
+            if (propertyName != obj.TypeName)
+            {
+                obj.TypeName = propertyName;
+            }
             return Add(obj);
         }
 
-        public override string ToString() => ElementItem.ToString();
+        public override string ToString() => XmlObject.ToString();
     }
 }

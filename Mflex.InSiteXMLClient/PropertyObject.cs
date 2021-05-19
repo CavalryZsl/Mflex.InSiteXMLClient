@@ -12,8 +12,8 @@ namespace Mflex.InSiteXMLClient
         public PropertyObject(string propertyName, string value)
             : base(propertyName, value)
         {
-            ElementItem.RemoveNodes();
-            ElementItem.Add(new XCData(value));
+            XmlObject.RemoveNodes();
+            XmlObject.Add(new XCData(value));
         }
     }
 }

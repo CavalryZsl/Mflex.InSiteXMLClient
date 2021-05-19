@@ -11,25 +11,25 @@ namespace Mflex.InSiteXMLClient
 
         public ServiceObject(string serviceType) : base("__service")
         {
-            ElementItem.SetAttributeValue("__serviceType", serviceType);
-            ElementItem.Add(new XElement("__txnGUID", Guid.NewGuid().ToString()));
-            ElementItem.Add(new XElement("__utcOffset", "+08:00"));
+            XmlObject.SetAttributeValue("__serviceType", serviceType);
+            XmlObject.Add(new XElement("__txnGUID", Guid.NewGuid().ToString()));
+            XmlObject.Add(new XElement("__utcOffset", "+08:00"));
             InputData = AddInputData();
-            ElementItem.Add(new ExecuteObject().ElementItem);
+            XmlObject.Add(new ExecuteObject().XmlObject);
             RequestData = AddRequestData();
         }
 
         private InputData AddInputData()
         {
             var inputData = new InputData();
-            ElementItem.Add(inputData.ElementItem);
+            XmlObject.Add(inputData.XmlObject);
             return inputData;
         }
 
         private RequestData AddRequestData()
         {
             var requestData = new RequestData();
-            ElementItem.Add(requestData.ElementItem);
+            XmlObject.Add(requestData.XmlObject);
             return requestData;
         }
     }

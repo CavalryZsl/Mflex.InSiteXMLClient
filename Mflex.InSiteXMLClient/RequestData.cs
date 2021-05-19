@@ -6,12 +6,12 @@ namespace Mflex.InSiteXMLClient
     {
         public RequestData() : base("__requestData")
         {
-            ElementItem.Add(new XElement("CompletionMsg"));
+            XmlObject.Add(new XElement("CompletionMsg"));
         }
 
         public RequestData Add(string propertyName)
         {
-            ElementItem.Add(new XElement(propertyName));
+            XmlObject.Add(new XElement(propertyName));
             return this;
         }
     }

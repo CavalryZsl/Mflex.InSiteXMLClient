@@ -30,7 +30,8 @@ namespace Mflex.InSiteXMLClient
 
         public async Task<ResponseData> SendAsync(DocumentObject doc)
         {
-            using var activity = s_activitySource.StartActivity(string.Join(",", doc.Services.Keys), ActivityKind.Client);
+            using var activity = s_activitySource.StartActivity(string.Join(",", doc.Services.Select(s => s.TypeName)), ActivityKind.Client);
+
             if (activity?.IsAllDataRequested == true)
             {
                 activity.SetTag("camstar.host", _hostName);
@@ -45,19 +46,21 @@ namespace Mflex.InSiteXMLClient
             {
                 try
                 {
-                    var result = await SendRequestAsync(doc);
-                    if (result.Error?.Contains("redo") == true)
+                    response = await SendRequestAsync(doc);
+
+                    if (activity?.IsAllDataRequested == true)
+                    {
+                        activity.SetTag("otel.status_code", response.HasError ? "ERROR" : "OK");
+                        if (response.HasError)
+                        {
+                            activity.SetTag("otel.status_description", response.Error);
+                        }
+                    }
+
+                    if (response.Error?.Contains("redo") == true)
                     {
                         shouldRetry = true;
                     }
-                    else
-                    {
-                        if (activity?.IsAllDataRequested == true)
-                        {
-                            activity.SetTag("otel.status_code", "OK");
-                        }
-                    }
-                    response = result;
                 }
                 catch (Exception ex)
                 {
@@ -65,12 +68,14 @@ namespace Mflex.InSiteXMLClient
                     {
                         shouldRetry = true;
                     }
+
                     if (activity?.IsAllDataRequested == true)
                     {
                         activity.SetTag("otel.status_code", "ERROR");
                         activity.SetTag("otel.status_description", ex.Message);
                         activity.SetTag("request_xml", doc.ToString());
                     }
+
                     response = ResponseData.FromError(ex.Message);
                 }
                 finally

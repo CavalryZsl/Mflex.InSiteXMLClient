@@ -9,8 +9,8 @@ namespace Mflex.InSiteXMLClient
 {
     public class DocumentObject : CamstarObject
     {
-        public IDictionary<string, ServiceObject> Services { get; } = new Dictionary<string, ServiceObject>();
-
+        private readonly IDictionary<string, ServiceObject> _services = new Dictionary<string, ServiceObject>();
+        public IEnumerable<ServiceObject> Services => _services.Values;
         public SessionObject Session { get; }
 
         public DocumentObject(string userName, string password)
@@ -22,23 +22,23 @@ namespace Mflex.InSiteXMLClient
         public DocumentObject(SessionObject session)
             : base("__InSite")
         {
-            ElementItem.Add(
+            XmlObject.Add(
                 new XAttribute("__version", "1.1"),
                 new XAttribute("__encryption", "2"));
 
             Session = session;
-            ElementItem.Add(Session.ElementItem);
+            Add(session);
         }
 
         public ServiceObject AddService(string serviceName)
         {
-            if (!Services.ContainsKey(serviceName))
+            if (!_services.ContainsKey(serviceName))
             {
-                Services.Add(serviceName, new ServiceObject(serviceName));
+                var svc = new ServiceObject(serviceName);
+                _services.Add(serviceName, svc);
+                Add(svc);
             }
-            var obj = Services[serviceName];
-            ElementItem.Add(obj.ElementItem);
-            return obj;
+            return _services[serviceName];
         }
     }
 }

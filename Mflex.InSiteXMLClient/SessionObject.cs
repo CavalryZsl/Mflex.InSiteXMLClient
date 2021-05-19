@@ -14,9 +14,9 @@ namespace Mflex.InSiteXMLClient
             var userElem = new NamedDataObject("user", userName);
             var passwordElem = new XElement("password", new XAttribute("__encrypted", "no"), new XCData(password));
             var connectElem = new XElement("__connect");
-            connectElem.Add(userElem.ElementItem);
+            connectElem.Add(userElem.XmlObject);
             connectElem.Add(passwordElem);
-            ElementItem.Add(connectElem);
+            XmlObject.Add(connectElem);
         }
     }
 }
