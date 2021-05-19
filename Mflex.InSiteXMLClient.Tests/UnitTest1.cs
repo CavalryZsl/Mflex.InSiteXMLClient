@@ -1,21 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mflex.InSiteXMLClient;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.Sockets;
-using System.Xml.Linq;
 using System.Diagnostics;
+using Xunit;
 
 namespace Mflex.InSiteXMLClient.Tests
 {
-    [TestClass()]
-    public class XmlTemplatesTests
+    public class UnitTest1
     {
-        [TestMethod()]
-        public void BuildServiceTest()
+        [Fact]
+        public void Test1()
         {
             var stopwatch = new Stopwatch();
             for (int i = 0; i < 300; i++)
@@ -45,7 +37,7 @@ namespace Mflex.InSiteXMLClient.Tests
                 stopwatch.Stop();
                 Debug.WriteLine(stopwatch.ElapsedMilliseconds);
             }
-            Assert.IsTrue(true);
+            Assert.True(true);
         }
     }
 }

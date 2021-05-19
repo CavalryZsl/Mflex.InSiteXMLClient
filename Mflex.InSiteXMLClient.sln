@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mflex.InSiteXMLClient", "Mflex.InSiteXMLClient\Mflex.InSiteXMLClient.csproj", "{BF214F3B-64DC-4CAB-BA13-338380A27AA4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mflex.InSiteXMLClient.Tests", "Mflex.InSiteXMLClient.Tests\Mflex.InSiteXMLClient.Tests.csproj", "{2CEEE82B-FF57-4ED7-8E9C-EC931AC35745}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mflex.InSiteXMLClient.Tests", "Mflex.InSiteXMLClient.Tests\Mflex.InSiteXMLClient.Tests.csproj", "{551FDACB-919D-4D2D-89A0-CFD1C80290EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{BF214F3B-64DC-4CAB-BA13-338380A27AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF214F3B-64DC-4CAB-BA13-338380A27AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF214F3B-64DC-4CAB-BA13-338380A27AA4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2CEEE82B-FF57-4ED7-8E9C-EC931AC35745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2CEEE82B-FF57-4ED7-8E9C-EC931AC35745}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2CEEE82B-FF57-4ED7-8E9C-EC931AC35745}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2CEEE82B-FF57-4ED7-8E9C-EC931AC35745}.Release|Any CPU.Build.0 = Release|Any CPU
+		{551FDACB-919D-4D2D-89A0-CFD1C80290EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{551FDACB-919D-4D2D-89A0-CFD1C80290EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{551FDACB-919D-4D2D-89A0-CFD1C80290EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{551FDACB-919D-4D2D-89A0-CFD1C80290EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
