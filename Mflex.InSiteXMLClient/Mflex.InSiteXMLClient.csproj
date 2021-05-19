@@ -3,8 +3,20 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Copyright />
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <Copyright>Copyright ©2021 Mflex</Copyright>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <Authors>kennywangjin</Authors>    
+    <Description>Rewritten Camstar .NET client for dotnet5 and upper platform</Description>
+    <Company>Mflex</Company>
+    <PackageReleaseNotes>Rewritten Camstar .NET client for dotnet5 and upper platform</PackageReleaseNotes>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
