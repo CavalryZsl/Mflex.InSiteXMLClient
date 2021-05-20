@@ -30,7 +30,7 @@ namespace Mflex.InSiteXMLClient
 
         public async Task<ResponseData> SendAsync(DocumentObject doc)
         {
-            using var activity = s_activitySource.StartActivity(string.Join(",", doc.Services.Select(s => s.TypeName)), ActivityKind.Client);
+            using var activity = s_activitySource.StartActivity(string.Join(",", doc.Services.Select(s => s.InstanceType)), ActivityKind.Client);
 
             if (activity?.IsAllDataRequested == true)
             {

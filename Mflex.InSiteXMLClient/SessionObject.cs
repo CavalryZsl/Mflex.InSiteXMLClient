@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 
 namespace Mflex.InSiteXMLClient
 {
@@ -6,17 +7,16 @@ namespace Mflex.InSiteXMLClient
     {
         public string? UserName { get; }
 
-        public string? SessionId { get; }
+        public string SessionId { get; }
 
         public SessionObject(string userName, string password) : base("__session")
         {
+            SessionId = Guid.NewGuid().ToString();
             UserName = userName;
-            var userElem = new NamedDataObject("user", userName);
-            var passwordElem = new XElement("password", new XAttribute("__encrypted", "no"), new XCData(password));
-            var connectElem = new XElement("__connect");
-            connectElem.Add(userElem.XmlObject);
-            connectElem.Add(passwordElem);
-            XmlObject.Add(connectElem);
+            XmlObject.Add(new XElement("__connect",
+                new XElement("user", new XElement("__name", new XCData(userName))),
+                new XElement("password", new XAttribute("__encrypted", "no"), new XCData(password))
+                ));
         }
     }
 }

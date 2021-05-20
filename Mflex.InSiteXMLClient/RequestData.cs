@@ -9,7 +9,7 @@ namespace Mflex.InSiteXMLClient
             XmlObject.Add(new XElement("CompletionMsg"));
         }
 
-        public RequestData Add(string propertyName)
+        public RequestData AddProperty(string propertyName)
         {
             XmlObject.Add(new XElement(propertyName));
             return this;
