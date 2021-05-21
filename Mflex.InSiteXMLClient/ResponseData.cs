@@ -11,17 +11,15 @@ namespace Mflex.InSiteXMLClient
     {
         private readonly XElement _element;
 
-        public string? Error => GetError();
-
-        public IEnumerable<string> ServiceErrors
-            => _element.Descendants("__service").Select(svc => GetServiceError(svc)).Where(m => m is { Length: > 0 });
-
-        public string? Message => _element.Descendants("CompletionMsg").FirstOrDefault()?.Value;
-
+        public string? Error { get; }
+        public string? Message { get; }
         public bool HasError => Error is { Length: > 0 };
 
         public string? this[string propertyName]
-            => _element.Descendants("__service").FirstOrDefault()?.Descendants("__responseData").FirstOrDefault()?.Descendants(propertyName).FirstOrDefault()?.Value;
+            => _element.Descendants("__service")
+            .SelectMany(s => s.Descendants("__responseData"))
+            .SelectMany(r => r.Descendants(propertyName))
+            .FirstOrDefault()?.Value;
 
         public static ResponseData FromError(string error)
         {
@@ -42,25 +40,32 @@ namespace Mflex.InSiteXMLClient
         public ResponseData(string responseText)
         {
             _element = XElement.Parse(responseText.Trim('\0'));
+            var responses = _element.Descendants("__responseData");
+            var errors = responses.Select(resp => GetResponseError(resp));
+            var messages = responses.Select(resp => GetResponseMessage(resp));
+
+            var svc = _element.Element("__service");
+            if (svc != null)
+            {
+                Error = errors.Where(e => e is { Length: > 0 }).FirstOrDefault();
+                Message = messages.Where(m => m is { Length: > 0 }).FirstOrDefault();
+            }
         }
 
-        private string? GetError()
+        private static string? GetResponseError(XElement? responseData)
         {
-            var exceptionData = _element.Descendants("__responseData").FirstOrDefault()?.Descendants("__exceptionData").FirstOrDefault();
-            if (exceptionData == null)
+            if (responseData == null)
             {
                 return null;
             }
-            return exceptionData.Element("__errorDescription")?.Value ?? exceptionData.Element("__errorSystemMessage")?.Value;
+            var exData = responseData.Element("__exceptionData");
+            if (exData == null)
+            {
+                return null;
+            }
+            return exData.Element("__errorDescription")?.Value ?? exData.Element("__errorSystemMessage")?.Value;
         }
 
-        private static string GetServiceError(XElement svcElement)
-        {
-            return svcElement
-                .Element("__responseData")?
-                .Element("__exceptionData")?
-                .Element("__errorDescription")?
-                .Value ?? string.Empty;
-        }
+        private static string? GetResponseMessage(XElement? responseData) => responseData?.Element("CompletionMsg")?.Value;
     }
 }
